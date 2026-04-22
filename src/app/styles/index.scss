@@ -1,0 +1,115 @@
+@import './fonts.scss';
+@import './reset.scss';
+@import './mixin.scss';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'Inter-Regular';
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --light: rgba(220, 224, 237, 1);
+
+  --light-btn-color: rgba(255, 255, 255, 1);
+
+  --primary-bg: #14171e;
+  --secondary-bg: #1b1d24;
+  --third-bg: #11141b;
+  --fourth-bg: #0e1118;
+  --accent-color: #4875b9;
+
+  --banner-bg-bg: #0d101a;
+  --card-bg-color: #131725;
+
+  --primary-text-color: rgba(98, 102, 118, 1); // можно оставить
+  --primary-text-color-rgb: 98, 102, 118;
+
+  --padding-xs: 4px;
+  --padding-sm: 10px;
+  --padding-md: 17px;
+  --padding-lg: 22px;
+  --padding-xl: 32px;
+  --padding-2xl: 40px;
+
+  --container-width: 1200px;
+
+  --color-text-footer: #626676cc;
+
+  --border-color: #23262f;
+
+  --bg-modal: #1b1d24;
+  --danger-color: rgb(182, 29, 29);
+  --success-color: rgb(47, 155, 4);
+
+  --media-xl: 1200px;
+  --media-lg: 980px;
+  --media-md: 780px;
+  --media-sm: 540px;
+  --media-xs: 380px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  padding-right: var(--padding-sm);
+  padding-left: var(--padding-sm);
+}
+
+body {
+  background: var(--primary-bg);
+}
+
+.text {
+  color: rgb(var(--primary-text-color-rgb)); // обычный цвет
+}
+
+.text40 {
+  color: rgba(var(--primary-text-color-rgb), 0.4); // 40% прозрачность
+}
+
+.text60 {
+  color: rgba(var(--primary-text-color-rgb), 0.6); // 60% прозрачность
+}
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent-color);
+  transition: all 0.5s;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-text-footer);
+}

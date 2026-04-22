@@ -1,0 +1,34 @@
+.Footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 20px;
+  gap: 12px;
+  background-color: var(--fourth-bg);
+  @media (max-width: 780px) {
+    gap: 25px;
+    padding: 22px 39px;
+  }
+  .item {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-footer);
+    flex-wrap: wrap;
+    .copyrating {
+      color: var(--color-text-footer);
+    }
+    .pont {
+      color: var(--color-text-footer);
+      content: '.';
+    }
+    .link {
+      color: var(--color-text-footer);
+      font-size: 0.875rem;
+    }
+  }
+}

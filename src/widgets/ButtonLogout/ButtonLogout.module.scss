@@ -1,0 +1,8 @@
+:global(.MuiButton-root) {
+  &.LogoutButton {
+    padding-top: var(--padding-sm);
+    padding-bottom: var(--padding-sm);
+    padding-left: var(--padding-md);
+    padding-right: var(--padding-md);
+  }
+}

@@ -1,0 +1,12 @@
+.FileUploader {
+  .classNameTitle {
+    color: var(--light);
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .button {
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+}
