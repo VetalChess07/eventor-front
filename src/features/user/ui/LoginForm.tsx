@@ -10,7 +10,6 @@ import {
   InputAdornment,
   Paper,
   Stack,
-  TextField,
   Typography,
   useMediaQuery,
   useTheme,
@@ -26,6 +25,7 @@ import { setUser } from '@/entities/user/model/slice/userSlice';
 import { RoutePath } from '@/shared/config/routeConfig';
 import { getErrorMessage } from '@/shared/lib/getErrorMessage';
 import { useAppDispatch } from '@/shared/lib/hooks/redux/useAppDispatch';
+import { Input } from '@/shared/ui/Input/Input';
 
 export const LoginForm: React.FC = () => {
   const [login, setLogin] = useState('');
@@ -115,8 +115,9 @@ export const LoginForm: React.FC = () => {
           )}
 
           <Stack spacing={2}>
-            <TextField
+            <Input
               label="Логин"
+              sxLabel={{ color: '#FFFFFF' }}
               value={login}
               onChange={(e) => setLogin(e.target.value)}
               required
@@ -124,15 +125,11 @@ export const LoginForm: React.FC = () => {
               autoComplete="username"
               autoFocus={!isMobile}
               disabled={isLoading}
-              slotProps={{
-                inputLabel: {
-                  sx: { color: '#AEB6CA' },
-                },
-              }}
             />
 
-            <TextField
+            <Input
               label="Пароль"
+              sxLabel={{ color: '#FFFFFF' }}
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -141,9 +138,6 @@ export const LoginForm: React.FC = () => {
               autoComplete="current-password"
               disabled={isLoading}
               slotProps={{
-                inputLabel: {
-                  sx: { color: '#AEB6CA' },
-                },
                 input: {
                   endAdornment: (
                     <InputAdornment position="end">
