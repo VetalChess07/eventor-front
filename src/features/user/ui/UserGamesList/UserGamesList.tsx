@@ -45,7 +45,6 @@ export const UserGamesList = ({
               id:{game.id}
             </Typography>
             <Typography>{game.name}</Typography>
-            <Typography>Очки: {game.points ?? 0}</Typography>
           </Stack>
           <IconButton
             onClick={() => handleRemove(game.id)}

@@ -1,5 +1,4 @@
 import {
-  Pagination,
   Paper,
   Stack,
   Table,
@@ -10,36 +9,16 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useEffect, useMemo, useState } from 'react';
 
 import { useGetSuccessSummaryQuery } from '@/entities/results/model/api/results.api';
 import { Loader } from '@/shared/ui/Loader/Loader';
 import { ErrorAlert } from '@/widgets/ErrorAlert/ErrorAlert';
 
-const ITEMS_PER_PAGE = 16;
-
 export const SuccessSummaryTable = () => {
-  const [page, setPage] = useState(1);
   const { data, isLoading, error } = useGetSuccessSummaryQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   const summary = data?.data ?? [];
-  const pageCount = Math.ceil(summary.length / ITEMS_PER_PAGE);
-  const pageOffset = (page - 1) * ITEMS_PER_PAGE;
-  const paginatedSummary = useMemo(
-    () => summary.slice(pageOffset, pageOffset + ITEMS_PER_PAGE),
-    [summary, pageOffset],
-  );
-
-  useEffect(() => {
-    if (pageCount > 0 && page > pageCount) {
-      setPage(pageCount);
-    }
-  }, [page, pageCount]);
-
-  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
 
   if (isLoading) return <Loader />;
   if (error)
@@ -76,11 +55,11 @@ export const SuccessSummaryTable = () => {
           </TableHead>
 
           <TableBody>
-            {paginatedSummary.map((item, index) => {
+            {summary.map((item, index) => {
               const displayName = item.user.tgName
                 ? `@${item.user.tgName}`
                 : item.user.phone_number;
-              const position = pageOffset + index + 1;
+              const position = index + 1;
 
               return (
                 <TableRow
@@ -112,10 +91,6 @@ export const SuccessSummaryTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {pageCount > 1 && (
-        <Pagination count={pageCount} page={page} onChange={handlePageChange} />
-      )}
     </Stack>
   );
 };
