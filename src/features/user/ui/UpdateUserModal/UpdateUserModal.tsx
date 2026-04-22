@@ -1,6 +1,6 @@
 import { Modal, Stack, Button, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from '@/shared/ui/Input/Input';
 import { useSnackbar } from '@/shared/ui/Snackbar/Snackbar';
 import PhoneInput from '@/shared/ui/InputPhone/PhoneInput';
@@ -21,6 +21,8 @@ export const UpdateUserModal = ({
 }: UpdateUserModalProps) => {
   const [phone, setPhone] = useState('');
   const [tgName, setTgName] = useState('');
+  const [name, setName] = useState('');
+  const [group, setGroup] = useState('');
   const [errors, setErrors] = useState({ phone: '', tgName: '' });
 
   const [updateUser, { isLoading }] = useUpdateUserMutation();
@@ -29,8 +31,20 @@ export const UpdateUserModal = ({
   const resetForm = () => {
     setPhone('');
     setTgName('');
+    setName('');
+    setGroup('');
     setErrors({ phone: '', tgName: '' });
   };
+
+  useEffect(() => {
+    if (!open || !user) return;
+
+    setPhone(user.phone_number ?? '');
+    setTgName(user.tgName ?? '');
+    setName(user.name ?? '');
+    setGroup(user.group ?? '');
+    setErrors({ phone: '', tgName: '' });
+  }, [open, user]);
 
   const handleClose = () => {
     resetForm();
@@ -66,6 +80,8 @@ export const UpdateUserModal = ({
         id: user.id,
         phone_number: cleanPhone,
         tgName,
+        name: name.trim() || null,
+        group: group.trim() || null,
       }).unwrap();
       showSnackbar('Пользователь обновлён', 'success');
       refetch();
@@ -105,6 +121,22 @@ export const UpdateUserModal = ({
         <Typography variant="h6">Обновить пользователя</Typography>
 
         <Stack spacing={2}>
+          <Input
+            label="ФИО"
+            placeholder="Иванов Иван Иванович"
+            fullWidth
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <Input
+            label="Группа"
+            placeholder="ИНБ-Б-О-23-1"
+            fullWidth
+            value={group}
+            onChange={(e) => setGroup(e.target.value)}
+          />
+
           <PhoneInput
             value={phone}
             label="Номер телефона"

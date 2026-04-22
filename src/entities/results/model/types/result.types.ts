@@ -16,11 +16,12 @@ export interface ResultUsers {
   user_id: number;
   user: {
     id: number;
+    name: string | null;
+    group: string | null;
     tgName: string | null;
     phone_number: string | null;
     status: UserStatus;
   };
-  number_ticket?: number | null;
   points: number;
 }
 export interface PrizeRange {
@@ -32,6 +33,8 @@ export interface PrizeRange {
 export interface SuccessSummaryItem {
   user: {
     id: number;
+    name: string | null;
+    group: string | null;
     tgName: string | null;
     phone_number: string | null;
     status: UserStatus;

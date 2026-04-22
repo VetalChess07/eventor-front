@@ -7,7 +7,7 @@ import { Game } from '@/entities/games';
 
 interface UserGamesListProps {
   userId: number;
-  games: (Game & { number_ticket?: number; points?: number })[];
+  games: (Game & { points?: number })[];
   onRemoved?: () => void;
 }
 

@@ -67,10 +67,11 @@ export const userApi = createApi({
     createUser: builder.mutation<
       DefaulResponse<User>,
       {
+        name?: string;
+        group?: string;
         phone_number?: string;
         tgName?: string;
         gameId?: number | null;
-        number_ticket?: number;
         points?: number;
       }
     >({
@@ -116,7 +117,7 @@ export const userApi = createApi({
 
     addUserByGame: builder.mutation<
       any,
-      { userId: number; gameId: number; number_ticket?: number; points?: number }
+      { userId: number; gameId: number; points?: number }
     >({
       query: (body) => ({
         url: '/games/add-user-by-game',

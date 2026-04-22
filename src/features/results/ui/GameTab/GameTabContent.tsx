@@ -101,6 +101,8 @@ export const GameTabContent: FC<GameTabContentProps> = ({
           >
             <TableRow>
               <TableCell>ID ученика</TableCell>
+              <TableCell>ФИО</TableCell>
+              <TableCell>Группа</TableCell>
               <TableCell>Имя / телефон</TableCell>
               <TableCell>Очки</TableCell>
             </TableRow>
@@ -124,6 +126,12 @@ export const GameTabContent: FC<GameTabContentProps> = ({
                 >
                   <TableCell sx={{ color: '#DCE0ED' }}>
                     {item.user.id}
+                  </TableCell>
+                  <TableCell sx={{ color: '#DCE0ED' }}>
+                    {item.user.name ?? '-'}
+                  </TableCell>
+                  <TableCell sx={{ color: '#DCE0ED' }}>
+                    {item.user.group ?? '-'}
                   </TableCell>
                   <TableCell sx={{ color: '#DCE0ED' }}>
                     {displayName ?? '-'}

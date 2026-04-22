@@ -47,6 +47,8 @@ export const SuccessSummaryTable = () => {
             <TableRow>
               <TableCell>Место</TableCell>
               <TableCell>ID ученика</TableCell>
+              <TableCell>ФИО</TableCell>
+              <TableCell>Группа</TableCell>
               <TableCell>Имя / телефон</TableCell>
               <TableCell align="center">Мероприятий</TableCell>
               <TableCell align="center">Всего очков</TableCell>
@@ -72,6 +74,12 @@ export const SuccessSummaryTable = () => {
                   <TableCell sx={{ color: '#DCE0ED' }}>#{position}</TableCell>
                   <TableCell sx={{ color: '#DCE0ED' }}>
                     {item.user.id}
+                  </TableCell>
+                  <TableCell sx={{ color: '#DCE0ED' }}>
+                    {item.user.name ?? '-'}
+                  </TableCell>
+                  <TableCell sx={{ color: '#DCE0ED' }}>
+                    {item.user.group ?? '-'}
                   </TableCell>
                   <TableCell sx={{ color: '#DCE0ED' }}>
                     {displayName ?? '-'}

@@ -61,7 +61,7 @@ export const ResultsReport = () => {
           sx={{ fontSize: '.75rem' }}
           variant="contained"
         >
-          Скачать очки по мероприятию: {selectedGame || '-'}
+          Скачать очки по мероприятию с id: {selectedGame || '-'}
         </Button>
       </Stack>
     </Stack>

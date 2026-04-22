@@ -134,6 +134,12 @@ export const AddUserToGameModal = ({
               </Typography>
               <Typography sx={{ color: '#4875B9' }}>ID: {user.id}</Typography>
               <Typography sx={{ color: '#4875B9' }}>
+                ФИО: {user.name ?? '-'}
+              </Typography>
+              <Typography sx={{ color: '#4875B9' }}>
+                Группа: {user.group ?? '-'}
+              </Typography>
+              <Typography sx={{ color: '#4875B9' }}>
                 Имя: {user.tgName ?? '-'}
               </Typography>
               <Typography sx={{ color: '#4875B9' }}>

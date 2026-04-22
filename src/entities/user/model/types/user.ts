@@ -5,12 +5,14 @@ export type UserStatus = 'BAN' | 'ACTIVE';
 export interface User {
   id: number;
   login?: string | null;
+  name?: string | null;
+  group?: string | null;
   tgName?: string | null;
   phone_number?: string | null;
   status: UserStatus;
   created_at?: Date;
   updated_at?: Date;
-  games?: (Game & { number_ticket?: number; points?: number })[];
+  games?: (Game & { points?: number })[];
   is2FA?: boolean;
   twoFASecret?: string;
   twoFAQr?: string;
@@ -18,9 +20,10 @@ export interface User {
 }
 
 export interface UserCreate {
+  name?: string | null;
+  group?: string | null;
   tgName?: string | null;
   phone_number?: string | null;
-  ticket_number: number | null;
 }
 
 export interface UserByGameID extends User {

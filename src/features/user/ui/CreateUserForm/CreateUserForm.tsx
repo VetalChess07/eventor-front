@@ -11,6 +11,8 @@ interface CreateUserFormProps {
 }
 
 export const CreateUserForm = ({ refetch }: CreateUserFormProps) => {
+  const [name, setName] = useState('');
+  const [group, setGroup] = useState('');
   const [phone, setPhone] = useState('');
   const [tgName, setTgName] = useState('');
   const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
@@ -25,6 +27,8 @@ export const CreateUserForm = ({ refetch }: CreateUserFormProps) => {
   const { showSnackbar } = useSnackbar();
 
   const resetForm = () => {
+    setName('');
+    setGroup('');
     setPhone('');
     setTgName('');
 
@@ -72,6 +76,8 @@ export const CreateUserForm = ({ refetch }: CreateUserFormProps) => {
 
     try {
       await createUser({
+        name: name.trim() || undefined,
+        group: group.trim() || undefined,
         phone_number: cleanPhone || undefined,
         tgName: tgName || undefined,
         gameId: selectedGameId,
@@ -138,6 +144,27 @@ export const CreateUserForm = ({ refetch }: CreateUserFormProps) => {
         Добавить ученика
       </Typography>
       <Stack sx={{ width: '100%', alignItems: 'flex-start' }} spacing={3}>
+        <Stack
+          gap={2}
+          direction={{ xs: 'column', sm: 'row' }}
+          sx={{ width: '100%' }}
+        >
+          <Input
+            label="ФИО"
+            placeholder="Иванов Иван Иванович"
+            fullWidth
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            label="Группа"
+            placeholder="ИНБ-Б-О-23-1"
+            fullWidth
+            value={group}
+            onChange={(e) => setGroup(e.target.value)}
+          />
+        </Stack>
+
         <Stack
           gap={2}
           direction={{ xs: 'column', sm: 'row' }}

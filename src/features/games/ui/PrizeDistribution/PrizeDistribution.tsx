@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Stack, Typography, Button, IconButton } from '@mui/material';
+import { Box, Stack, Typography, Button, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Input } from '@/shared/ui/Input/Input';
 import { PrizeDistributionPreview } from './PrizeDistributionPreview';
@@ -173,41 +173,67 @@ export const PrizeDistribution = ({
         onChange={(e) => setDefaultPrize(Number(e.target.value))}
       />
 
-      <Stack spacing={1}>
+      <Stack spacing={{ xs: 1.5, sm: 1 }}>
         {value.map((range, index) => (
           <Stack
             key={index}
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ width: '100%', justifyContent: 'center' }}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1.5, sm: 2 }}
+            alignItems={{ xs: 'stretch', sm: 'center' }}
+            sx={{
+              width: '100%',
+              justifyContent: 'center',
+              p: { xs: 1.5, sm: 0 },
+              border: { xs: '1px solid rgba(72, 117, 185, 0.35)', sm: 'none' },
+              borderRadius: { xs: '8px', sm: 0 },
+            }}
           >
-            <Input
-              type="number"
-              label="С места"
-              value={range.from}
-              inputProps={{ min: 1, max: countWinner }}
-              onChange={(e) => handleRangeChange(index, 'from', e.target.value)}
-            />
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(3, 1fr)' },
+                gap: { xs: 1.5, sm: 2 },
+                width: '100%',
+              }}
+            >
+              <Input
+                type="number"
+                label="С места"
+                value={range.from}
+                inputProps={{ min: 1, max: countWinner }}
+                onChange={(e) =>
+                  handleRangeChange(index, 'from', e.target.value)
+                }
+              />
 
-            <Input
-              type="number"
-              label="По место"
-              value={range.to}
-              inputProps={{ min: 1, max: countWinner }}
-              onChange={(e) => handleRangeChange(index, 'to', e.target.value)}
-            />
+              <Input
+                type="number"
+                label="По место"
+                value={range.to}
+                inputProps={{ min: 1, max: countWinner }}
+                onChange={(e) => handleRangeChange(index, 'to', e.target.value)}
+              />
 
-            <Input
-              type="number"
-              label="Очки"
-              value={range.amount}
-              onChange={(e) =>
-                handleRangeChange(index, 'amount', e.target.value)
-              }
-            />
+              <Input
+                type="number"
+                label="Очки"
+                value={range.amount}
+                sxInner={{ gridColumn: { xs: '1 / -1', sm: 'auto' } }}
+                onChange={(e) =>
+                  handleRangeChange(index, 'amount', e.target.value)
+                }
+              />
+            </Box>
 
-            <IconButton color="error" onClick={() => handleRemoveRange(index)}>
+            <IconButton
+              color="error"
+              onClick={() => handleRemoveRange(index)}
+              sx={{
+                alignSelf: { xs: 'flex-end', sm: 'center' },
+                width: 40,
+                height: 40,
+              }}
+            >
               <DeleteIcon />
             </IconButton>
           </Stack>
@@ -217,11 +243,15 @@ export const PrizeDistribution = ({
       {errorState && <ErrorAlert message={errorState} />}
       {error && <ErrorAlert message={error} />}
 
-      <Stack sx={{ flexWrap: 'wrap', gap: '16px' }} direction="row">
+      <Stack
+        sx={{ flexWrap: 'wrap', gap: '16px' }}
+        direction={{ xs: 'column', sm: 'row' }}
+      >
         <Button
           variant="outlined"
           onClick={handleAddRange}
           disabled={countWinner <= 0}
+          sx={{ width: { xs: '100%', sm: 'auto' } }}
         >
           Добавить диапазон
         </Button>
@@ -231,6 +261,7 @@ export const PrizeDistribution = ({
           color="primary"
           onClick={generateDistribution}
           disabled={countWinner <= 0}
+          sx={{ width: { xs: '100%', sm: 'auto' } }}
         >
           Показать и сохранить шкалу
         </Button>

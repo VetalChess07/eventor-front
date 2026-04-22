@@ -112,6 +112,8 @@ export const UsersList = ({
           >
             <TableRow>
               <TableCell sx={verticalTextStyle}>ID</TableCell>
+              <TableCell sx={verticalTextStyle}>ФИО</TableCell>
+              <TableCell sx={verticalTextStyle}>Группа</TableCell>
               <TableCell sx={verticalTextStyle}>Имя в Telegram</TableCell>
               <TableCell sx={verticalTextStyle}>Телефон</TableCell>
               <TableCell sx={verticalTextStyle}>Статус</TableCell>
@@ -128,6 +130,8 @@ export const UsersList = ({
             {users.map((user) => (
               <TableRow key={user.id}>
                 <TableCell sx={verticalTextStyle}>{user.id}</TableCell>
+                <TableCell sx={verticalTextStyle}>{user.name || '-'}</TableCell>
+                <TableCell sx={verticalTextStyle}>{user.group || '-'}</TableCell>
                 <TableCell sx={verticalTextStyle}>
                   {user.tgName || '-'}
                 </TableCell>

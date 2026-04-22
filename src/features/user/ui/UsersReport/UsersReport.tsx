@@ -81,7 +81,7 @@ export const UsersReport = () => {
           onClick={() => handleDownloadGameUsers(selectedGame)}
           sx={{ fontSize: '.75rem' }}
         >
-          Скачать юзеров по теме: {selectedGame || '-'}
+          Скачать юзеров по теме c id: {selectedGame || '-'}
         </Button>
       </Stack>
     </Stack>

@@ -1,9 +1,19 @@
-import { Stack, Button, Typography, Divider, Box } from '@mui/material';
+import {
+  Stack,
+  Button,
+  Typography,
+  Box,
+  Switch,
+  CircularProgress,
+} from '@mui/material';
 import { useState } from 'react';
 import { Input } from '@/shared/ui/Input/Input';
 import { useSnackbar } from '@/shared/ui/Snackbar/Snackbar';
 import PhoneInput from '@/shared/ui/InputPhone/PhoneInput';
-import { useSearchUserMutation } from '@/entities/user/model/api/user.api';
+import {
+  useSearchUserMutation,
+  useSetUserBanStatusMutation,
+} from '@/entities/user/model/api/user.api';
 import { User } from '@/entities/user';
 import { statusUserKeys } from '@/entities/user/model/conts/statusKeys';
 import { AddUserToGameModal } from '../AddUserToGameModal/AddUserToGameModal';
@@ -24,6 +34,8 @@ export const SearchUserForm = ({
   const [errors, setErrors] = useState({ phone: '', tgName: '' });
 
   const [searchUser, { isLoading }] = useSearchUserMutation();
+  const [setUserBanStatus, { isLoading: isStatusLoading }] =
+    useSetUserBanStatusMutation();
   const { showSnackbar } = useSnackbar();
 
   const validateForm = () => {
@@ -58,6 +70,31 @@ export const SearchUserForm = ({
     } catch (err: any) {
       showSnackbar(err?.data?.error ?? 'Пользователь не найден', 'error');
       onResult(null);
+    }
+  };
+
+  const handleToggleStatus = async () => {
+    if (!searchedUser) return;
+
+    const status = searchedUser.status === 'ACTIVE' ? 'BAN' : 'ACTIVE';
+
+    try {
+      const response = await setUserBanStatus({
+        userId: searchedUser.id,
+        status,
+      }).unwrap();
+
+      onResult(response.data);
+      refetch();
+      showSnackbar(
+        `Пользователь ${status === 'BAN' ? 'забанен' : 'разбанен'}`,
+        'success',
+      );
+    } catch (err: any) {
+      showSnackbar(
+        err?.data?.error ?? 'Ошибка при обновлении статуса',
+        'error',
+      );
     }
   };
 
@@ -132,6 +169,12 @@ export const SearchUserForm = ({
               ID: {searchedUser.id}
             </Typography>
             <Typography sx={{ color: '#4875B9' }}>
+              ФИО: {searchedUser.name ?? '-'}
+            </Typography>
+            <Typography sx={{ color: '#4875B9' }}>
+              Группа: {searchedUser.group ?? '-'}
+            </Typography>
+            <Typography sx={{ color: '#4875B9' }}>
               Telegram: {searchedUser.tgName ?? '-'}
             </Typography>
             <Typography sx={{ color: '#4875B9' }}>
@@ -140,6 +183,17 @@ export const SearchUserForm = ({
             <Typography sx={{ color: '#4875B9' }}>
               Статус: {statusUserKeys[searchedUser.status]}
             </Typography>
+            <Stack direction="row" alignItems="center" spacing={1} mt={1}>
+              <Typography sx={{ color: '#4875B9' }}>Активен</Typography>
+              <Switch
+                checked={searchedUser.status === 'ACTIVE'}
+                onChange={handleToggleStatus}
+                disabled={isStatusLoading}
+              />
+              <Box sx={{ width: 20, height: 20 }}>
+                {isStatusLoading && <CircularProgress size={20} />}
+              </Box>
+            </Stack>
           </Box>
         </>
       )}
