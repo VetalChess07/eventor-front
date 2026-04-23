@@ -11,7 +11,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { navRoutes } from '@/shared/config/routeConfig';
-import { GameSelect } from '../GameSelect/GameSelect';
+
 import { ButtonLogout } from '../ButtonLogout/ButtonLogout';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/providers/storeProvider/config/store';
@@ -115,8 +115,6 @@ export const Nav = memo(() => {
             padding: 0,
           }}
         >
-          <GameSelect isChangeParams />
-
           {navLinkItems.map((route) => (
             <ListItem
               key={route.label}
